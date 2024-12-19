@@ -6,14 +6,44 @@ body {
     text-align: center;
     padding: 20px;
   }
+
+  body {
+    background-image: url('resources/importantthing.png');
+    background-size: cover; /* Ensures the image covers the whole screen */
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Keeps the image fixed while scrolling */
+  }
+
+  form {
+    display: flex;
+    flex-direction: column; /* Stack the rows vertically */
+    gap: 0px; /* Add space between rows */
+    align-items: flex-start; /* Align everything to the left */
+  }
   
+  label {
+    font-size: 15px; /* Adjust label font size as needed */
+    margin-bottom: 2px; /* Add space between the label and input */
+  }
+  
+  input {
+    width: 150px; /* You can tweak this value */
+    height: 27px; /* Adjust input height if needed */
+    padding: 7px; /* Adds some inner spacing for the text */
+    box-sizing: border-box; /* Ensure padding doesn't break width */
+    box-shadow: 0 16px 16px rgba(0, 0, 0, 0.75)
+  }
+
   #app {
-    max-width: 600px;
+    max-width: 1200px;
     max-height: 900px; 
     margin: auto;
+    margin-top: 80px;
     background: #3a3f47;
-    padding: 20px;
+    padding: 15px;
     border-radius: 15px;
+    background: rgba(0, 0, 0, 0.10);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5)
   }
   
   input {
@@ -24,16 +54,18 @@ body {
   }
   
   button {
-    background-color: #8f0e0e;
-    color: #000000;
+    background-color: #c70404;
+    color: #ffffff;
     border: none;
     padding: 10px 20px;
     cursor: pointer;
     border-radius: 5px;
+    width: 300px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5)
   }
   
   button:hover {
-    background-color: #21a1f1;
+    background-color: #850505;
   }
 
  /* Regular font */
@@ -80,4 +112,22 @@ h1, h2, h3 {
 em, i {
   font-family: "FS Sinclair Italic", sans-serif;
   font-style: italic; /* Use the italic font */
+}
+
+button {
+  font-family: "FS Sinclair Regular";
+  font-weight: normal; /* Use the regular weight */
+  background-color: #c50505; 
+  color: #ffffff;
+  text-align: center;
+  padding: 15px;
+}
+
+input {
+  font-family: "FS Sinclair Regular";
+  font-weight: normal; /* Use the regular weight */
+  background-color: #fcfcfc; 
+  color: #000000;
+  text-align: center;
+  padding: 5px;
 }
