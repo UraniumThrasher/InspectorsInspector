@@ -1,0 +1,83 @@
+/* styles.css */
+body {
+    font-family: "FS Sinclair Bold", "FS Sinclair Regular", "FS Sinclair Italic";
+    background-color: #282c34;
+    color: #ffffff;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  #app {
+    max-width: 600px;
+    max-height: 900px; 
+    margin: auto;
+    background: #3a3f47;
+    padding: 20px;
+    border-radius: 15px;
+  }
+  
+  input {
+    padding: 5px;
+    margin: 5px;
+    border: 1px solid #555;
+    border-radius: 5px;
+  }
+  
+  button {
+    background-color: #8f0e0e;
+    color: #000000;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  button:hover {
+    background-color: #21a1f1;
+  }
+
+ /* Regular font */
+@font-face {
+  font-family: "FS Sinclair Regular";
+  src: url("fonts/FS Sinclair Regular.otf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Bold font */
+@font-face {
+  font-family: "FS Sinclair";
+  src: url("fonts/FS Sinclair Bold.otf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
+
+/* Italic font */
+@font-face {
+  font-family: "FS Sinclair";
+  src: url("fonts/FS Sinclair Italic.otf") format("truetype");
+  font-weight: normal;
+  font-style: italic;
+}
+
+/* General body text */
+body {
+  font-family: "FS Sinclair Regular";
+  font-weight: normal; /* Use the regular weight */
+  background-color: #282c34; 
+  color: #ffffff;
+  text-align: center;
+  padding: 20px;
+}
+
+/* Headings use bold */
+h1, h2, h3 {
+  font-family: "FS Sinclair", sans-serif;
+  font-weight: bold; /* Use the bold font */
+}
+
+/* Italic text for emphasis */
+em, i {
+  font-family: "FS Sinclair Italic", sans-serif;
+  font-style: italic; /* Use the italic font */
+}

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head
+  >
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Helldivers Efficiency Calculator</title>
+  <link rel="stylesheet" href="style.css"> <!-- Connects CSS -->
+</head>
+<body>
+  <div id="app">
+    <h1>Inspector's Inspector</h1>
+    <form id="stats-form">
+      <label for="teamSize">Team Size (1-4):</label>
+      <input type="number" id="teamSize" name="teamSize"><br><br>
+
+      <label for="kills">Kills:</label>
+      <input type="number" id="kills" name="kills"><br><br>
+      
+      <label for="accuracy">Accuracy (%):</label>
+      <input type="number" id="accuracy" name="accuracy"><br><br>
+      
+      <label for="shotsFired">Shots Fired:</label>
+      <input type="number" id="shotsFired" name="shots"Fired><br><br>
+
+      <label for="shotsMissed">Shots Missed:</label>
+      <input type="number" id="shotsMissed" name="shotsMissed"><br><br>
+      
+      <label for="deaths">Deaths:</label>
+      <input type="number" id="deaths" name="deaths"><br><br>
+      
+      <label for="stims">Stims Used:</label>
+      <input type="number" id="stims" name="stims"><br><br>
+      
+      <label for="accidentals">Accidentals:</label>
+      <input type="number" id="accidentals" name="accidentals"><br><br>
+
+      <label for="reinforcements">Times Reinforced:</label>
+      <input type="number" id="reinforcements" name="reinforcements"><br><br>
+
+      <button type="button" id="calculate-btn">Calculate</button>
+    </form>
+    <div id="result"></div>
+  </div>
+  <script src="script.js"></script> <!-- Connects JavaScript -->
+</body>
+</html>
