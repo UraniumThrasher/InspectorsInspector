@@ -1,80 +1,81 @@
-function calculateEfficiencyRating(inputs) {
-  const { 
-    kills, 
-    accuracy, 
-    shotsFired, 
-    shotsMissed, 
-    deaths, 
-    stimsUsed, 
-    accidentals, 
-    timesReinforced, 
-    teamSize
-  } = inputs;
+document.getElementById('calculate-btn').addEventListener('click', function () {
+  // Get values from input fields
+  const teamSize = parseInt(document.getElementById('teamSize').value);
+  const kills = parseInt(document.getElementById('kills').value);
+  const accuracy = parseFloat(document.getElementById('accuracy').value);
+  const shotsFired = parseInt(document.getElementById('shotsFired').value);
+  const shotsMissed = parseInt(document.getElementById('shotsMissed').value);
+  const deaths = parseInt(document.getElementById('deaths').value);
+  const stims = parseInt(document.getElementById('stims').value);
+  const accidentals = parseInt(document.getElementById('accidentals').value);
+  const reinforcements = parseInt(document.getElementById('reinforcements').value);
 
-  // Kill calculation with diminishing returns
-  const maxKillsFor100Percent = 400;
-  const killBonus = Math.min(kills / maxKillsFor100Percent, 1) * 100;
-  const excessKillsBonus = kills > maxKillsFor100Percent 
-    ? (kills - maxKillsFor100Percent) * 0.05 // Bonus for excess kills
-    : 0;
+  // Set defaults for NaN inputs
+  const validKills = kills || 0;
+  const validAccuracy = accuracy || 0;
+  const validShotsFired = shotsFired || 0;
+  const validShotsMissed = shotsMissed || 0;
+  const validDeaths = deaths || 0;
+  const validStims = stims || 0;
+  const validAccidentals = accidentals || 0;
+  const validReinforcements = reinforcements || 0;
+  const validTeamSize = teamSize || 4;
 
-  // Accuracy calculation with scaling
-  const effectiveAccuracy = shotsFired > 20 
-    ? accuracy * Math.log10(shotsFired) / 2 // More shots fired = more weight
-    : accuracy; 
+  // Accuracy bonus based on shots fired and hits
+  const shotsHit = validShotsFired - validShotsMissed;
+  let accuracyBonus = 0;
+  if (shotsHit > 0) {
+    accuracyBonus = validAccuracy * Math.log10(shotsHit + 1);
+  }
+
+  // Kills contribution (diminishing returns after 400 kills)
+  let killBonus = validKills;
+  if (validKills > 400) {
+    killBonus = 400 + (validKills - 400) * 0.5; // Reduce impact beyond 400
+  }
 
   // Death penalty
-  const baseDeathPenalty = deaths <= 5 ? deaths * 10 : 50 + (deaths - 5) * 15;
+  let deathPenalty = validDeaths * 10;
+  if (validDeaths > 5) {
+    deathPenalty += (validDeaths - 5) * 5; // Extra penalty after 5 deaths
+  }
 
-  // Stim usage penalty
-  const stimPenalty = stimsUsed > 12 ? (stimsUsed - 12) * 1.5 : 0;
+  // Stim penalty
+  const stimPenalty = Math.max(0, validStims - 12) * 1.5;
 
-  // Accidentals penalty
-  const accidentalPenalty = accidentals * 15;
+  // Accidental penalty
+  const accidentalPenalty = validAccidentals * 15;
 
-  // Reinforcement bonus (ignored for team sizes 2 or less)
-  const reinforcementBonus = teamSize > 2 ? timesReinforced * 10 : 0;
+  // Reinforcement bonus
+  const reinforcementBonus = validTeamSize > 2 ? validReinforcements * 10 : 0;
 
-  // Team size multiplier
-  const teamSizeMultiplier = teamSize === 1 ? 15 : teamSize === 2 ? 10 : teamSize === 3 ? 5 : 0;
+  // Team size bonus
+  const teamSizeBonus = validTeamSize === 1 ? 15 : validTeamSize === 2 ? 10 : validTeamSize === 3 ? 5 : 0;
 
-  // Final rating calculation
-  let rating = (killBonus + excessKillsBonus + effectiveAccuracy - baseDeathPenalty - stimPenalty - accidentalPenalty + reinforcementBonus) / 5;
-  rating += teamSizeMultiplier;
+  // Calculate efficiency rating
+  const rating =
+    (killBonus + accuracyBonus - deathPenalty - stimPenalty - accidentalPenalty + reinforcementBonus + teamSizeBonus) / 5;
 
-  // Ensure rating is within 0-100
-  rating = Math.max(0, Math.min(rating, 100));
+  // Clamp rating to [0, 100]
+  const finalRating = Math.max(0, Math.min(100, rating));
 
   // Determine rank
-  const rank = calculateRank(rating);
+  const rank = finalRating >= 87.5
+    ? 'S'
+    : finalRating >= 75
+    ? 'A+'
+    : finalRating >= 62.5
+    ? 'A'
+    : finalRating >= 50
+    ? 'B+'
+    : finalRating >= 37.5
+    ? 'B'
+    : finalRating >= 25
+    ? 'C+'
+    : finalRating >= 12.5
+    ? 'C'
+    : 'D';
 
-  return { rating, rank };
-}
-
-function calculateRank(rating) {
-  if (rating <= 12.5) return 'D';
-  if (rating <= 25) return 'D+';
-  if (rating <= 37.5) return 'C';
-  if (rating <= 50) return 'C+';
-  if (rating <= 62.5) return 'B';
-  if (rating <= 75) return 'B+';
-  if (rating <= 87.5) return 'A';
-  if (rating < 100) return 'A+';
-  return 'S';
-}
-
-// Example Input
-const inputs = {
-  kills: 450,
-  accuracy: 85,
-  shotsFired: 200,
-  shotsMissed: 30,
-  deaths: 6,
-  stimsUsed: 15,
-  accidentals: 2,
-  timesReinforced: 3,
-  teamSize: 3
-};
-
-const result = calculateEfficiencyRating(inputs);
-console.log(result);
+  // Display result
+  document.getElementById('result').innerHTML = `Efficiency Rating: ${finalRating.toFixed(2)}% (${rank})`;
+});
