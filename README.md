@@ -1,6 +1,8 @@
 # Inspector's Inspector
 
 <sub>*Be the Inspector and inspect your democracy-dealing teammates (or, alternatively, yourself)!*</sub>
+<br><sub>*For Helldivers 2*</sub>
+
 ## What does it do?
 
 Nothing very special, really. It just takes your after-match stats and gives you a rating accordingly.
